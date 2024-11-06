@@ -1,0 +1,24 @@
+# version: '3.4'
+
+services:
+  onboardingproject:
+    image: onboardingproject
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgresql://AppDBA:Hg5R00t.09@db:5432/dbfastapi  # Update to PostgreSQL connection string
+
+  db:
+    image: postgres:latest  # Change to the PostgreSQL image
+    restart: always
+    environment:
+      POSTGRES_DB: dbfastapi  # The name of your database
+      POSTGRES_USER: AppDBA  # Set your username
+      POSTGRES_PASSWORD: Hg5R00t.09  # Set your user password
+    ports:
+      - "5432:5432"  # Expose the PostgreSQL default port
